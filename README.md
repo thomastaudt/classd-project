@@ -14,11 +14,10 @@ General points:
   * The high-frequency parts should be as closely together as possible
     (more on PCB design [here](http://www.eetimes.com/document.asp?doc_id=1274882)).
   * AD modulation ([3.1 here](http://www.ti.com/lit/an/sloa119b/sloa119b.pdf)).
-  * Full-Bridge topology ([Fig 5b here](http://www.coldamp.com/store/media/pdf/Class_D_audio_amplifiers_White_Paper_en.pdf)
+  * Full-Bridge topology ([Fig 5b here](http://www.coldamp.com/store/media/pdf/Class_D_audio_amplifiers_White_Paper_en.pdf)).
 
 ### Input Stage
-Input is inserted to the circuit with a 3.5 mm mono jack plug that usually has
-three pins (so that unplugged states can be detected). 
+Input is inserted to the circuit with a 3.5 mm mono jack plug. 
 
 An active low-pass filter of 2nd/3rd order 
 ([Butterworth coefficients and Sallen-Key topology](http://www.ti.com/lit/an/sloa049b/sloa049b.pdf)) 
