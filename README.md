@@ -12,9 +12,9 @@ presented.)
 
 General points:
   * The high-frequency parts should be as closely together as possible
-    (more on PCB Design [here](http://www.eetimes.com/document.asp?doc_id=1274882)).
-  * AD modulation [3.1 here](http://www.ti.com/lit/an/sloa119b/sloa119b.pdf).
-  * Full-Bridge topology[Fig 5b here](http://www.coldamp.com/store/media/pdf/Class_D_audio_amplifiers_White_Paper_en.pdf)
+    (more on PCB design [here](http://www.eetimes.com/document.asp?doc_id=1274882)).
+  * AD modulation ([3.1 here](http://www.ti.com/lit/an/sloa119b/sloa119b.pdf)).
+  * Full-Bridge topology ([Fig 5b here](http://www.coldamp.com/store/media/pdf/Class_D_audio_amplifiers_White_Paper_en.pdf)
 
 ### Input Stage
 Input is inserted to the circuit with a 3.5 mm mono jack plug that usually has
@@ -51,22 +51,23 @@ without dc component.
 
 ### Modulator
 The filtered audio input V1 and the generated triangle V2 are compared to
-yield the pulse width modulated signal Vm (high if V1 > V2, low otherwise)
-and its inverse Vmi. For this task the comparator lm360 is used.
+yield the pulse width modulated signal Q (high if V1 > V2, low otherwise)
+and its inverse Qi. For this task the comparator lm360 is used.
 
 ### Output Stage
 Design questions:
-  * [BTL output or single-ended](http://www.eetimes.com/document.asp?doc_id=1274877&page_number=2).
+  * [BTL output (full-bridge) or single-ended (half-bridge)](http://www.eetimes.com/document.asp?doc_id=1274877&page_number=2).
+  * MOSFET gate drivers / dead-time generation
 
 The output filter should be adjusted for high currents, so it must have a small
 resistance to prevent power loss. Therefore an LC
 ([common mode](http://www.eetimes.com/document.asp?doc_id=1274877&page_number=3)/
 [hybrid](http://www.eetimes.com/document.asp?doc_id=1274877&page_number=4))
-topology with Butterworth coefficients is used (second order, passive). See
-values for different speaker impedances [here](http://www.ti.com/lit/an/sloa119b/sloa119b.pdf).
+topology with Butterworth coefficients is used (second order, passive).
+Filter designs for different speaker impedances can be found
+[here](http://www.ti.com/lit/an/sloa119b/sloa119b.pdf).
 Points regarding the [Material Selection](http://www.eetimes.com/document.asp?doc_id=1274877):
-  * Pay attention to DC current rating of L; low change in inductance load
-    current (max 10%).
+  * Pay attention to DC current rating of L.
   * Use LC output filter without ceramic capacity.
 
 
@@ -78,3 +79,4 @@ Points regarding the [Material Selection](http://www.eetimes.com/document.asp?do
   * [Class D audio amplifiers: theory and design](http://www.coldamp.com/store/media/pdf/Class_D_audio_amplifiers_White_Paper_en.pdf)
   * [Class D Audio Amplifier Basics](http://www.irf.com/technical-info/appnotes/an-1071.pdf)
   * [Class D Audio Amplifiers: What, Why, and How](http://www.analog.com/library/analogDialogue/archives/40-06/class_d.pdf)
+  * [Design and analysis of a basic class D amplifier](http://www.eetimes.com/document.asp?doc_id=1274753)
