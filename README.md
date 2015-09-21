@@ -19,20 +19,21 @@ General points:
 ### Input Stage
 Input is inserted to the circuit with a 3.5 mm mono jack plug. 
 
-An active low-pass filter of 2nd/3rd order 
+An active low-pass filter of 2nd 
 ([Butterworth coefficients and Sallen-Key topology](http://www.ti.com/lit/an/sloa049b/sloa049b.pdf)) 
-with a corner frequency of around 30 kHz to 40 kHz shall filter input device noise
+with a corner frequency of around 30 kHz shall filter input device noise
 while not compromising the input signal in the audible 20 Hz to 20 kHz range.
 This removes unwanted high frequency components that may deteriorate the
 modulation (if the noise is close to or higher than the modulation
 frequency) and produce electromagnetic inference throughout the circuit.
+The supply voltage for the NE5532 is +6V and -6V (as for the rest of the
+circuit).
 
 After low-pass filtering, the signal is ac-coupled to the
-modulator/comparator using a simple capacity of around 5 μF. This assures
+modulator/comparator using a simple capacity of 5 μF. This assures
 that the input to the comparator is centered around 0 V as will be the
 input from the triangle generator. Frequencies of 20 Hz and above are
-barely affected by this (Question: How can we use ac coupling when the
-input of the comparator has low currents?).
+barely affected by this.
 
 ### Triangle/Sawtooth Generator
 For the pulse width modulation a triangle or sawtooth signal of a few
