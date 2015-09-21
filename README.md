@@ -17,6 +17,7 @@ General points:
   * Full-Bridge topology ([Fig 5b here](http://www.coldamp.com/store/media/pdf/Class_D_audio_amplifiers_White_Paper_en.pdf)).
 
 ### Input Stage
+![Input Stage Circuit](https://rawgit.com/thomastaudt/classd-project/master/circuits/input_stage.svg)
 Input is inserted to the circuit with a 3.5 mm mono jack plug. 
 
 An active low-pass filter of 2nd 
