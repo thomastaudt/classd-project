@@ -17,12 +17,12 @@ General points:
   * Full-Bridge topology ([Fig 5b here](http://www.coldamp.com/store/media/pdf/Class_D_audio_amplifiers_White_Paper_en.pdf)).
 
 ### Input Stage
-Input is inserted to the circuit with a 3.5 mm mono jack plug: 
+Input is inserted to the circuit with a 3.5 mm mono jack plug:
 
 ![Input Stage Circuit](https://rawgit.com/thomastaudt/classd-project/master/circuits/input_stage.svg)
 
 An active low-pass filter of 2nd 
-([Butterworth coefficients and Sallen-Key topology](http://www.ti.com/lit/an/sloa049b/sloa049b.pdf)) 
+([Butterworth coefficients and Sallen-Key topology](http://www.ti.com/lit/an/sloa049b/sloa049b.pdf), this [page](http://sim.okawa-denshi.jp/en/OPseikiLowkeisan.htm) is helpful) 
 with a corner frequency of around 30 kHz shall filter input device noise
 while not compromising the input signal in the audible 20 Hz to 20 kHz range.
 This removes unwanted high frequency components that may deteriorate the
@@ -71,10 +71,17 @@ of the 5μF film capacitor, but an early cutoff makes it very triangluar-ish.
 
 ### Modulator
 The filtered audio input V1 and the generated triangle V2 are compared to
-yield the pulse width modulated signal Q (high if V1 > V2, low otherwise)
-and its inverse Qi. For this task the comparator lm360 is used.
+yield the pulse width modulated (PWM) signal Q (high if V1 > V2, low otherwise)
+and its inverse Qi. For this task the comparator lm311 is used.
 
 ### Output Stage
+The most interesting part of the class D amplifier is the output stage, where
+(1) the actual amplification happens and (2) the signal is low-pass-filtered to (at least partially) remove the high-frequency components of the modulated
+signal. Two designs are common: Half-bridge or full-bridge (see e.g.
+[here](http://www.eetimes.com/document.asp?doc_id=1274877&page_number=2)).
+
+
+
 Design questions:
   * [BTL output (full-bridge) or single-ended (half-bridge)](http://www.eetimes.com/document.asp?doc_id=1274877&page_number=2).
   * MOSFET gate drivers / dead-time generation
@@ -100,3 +107,4 @@ Points regarding the [Material Selection](http://www.eetimes.com/document.asp?do
   * [Class D Audio Amplifier Basics](http://www.irf.com/technical-info/appnotes/an-1071.pdf)
   * [Class D Audio Amplifiers: What, Why, and How](http://www.analog.com/library/analogDialogue/archives/40-06/class_d.pdf)
   * [Design and analysis of a basic class D amplifier](http://www.eetimes.com/document.asp?doc_id=1274753)
+  * [Sallen-Key Low-pass Filter Design Tool](http://sim.okawa-denshi.jp/en/OPseikiLowkeisan.htm)
