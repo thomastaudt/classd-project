@@ -17,43 +17,71 @@ General points:
   * Full-Bridge topology ([Fig 5b here](http://www.coldamp.com/store/media/pdf/Class_D_audio_amplifiers_White_Paper_en.pdf)).
 
 ### Input Stage
-Input is inserted to the circuit with a 3.5 mm mono jack plug. 
+Input is inserted to the circuit with a 3.5 mm mono jack plug:
 
-An active low-pass filter of 2nd/3rd order 
-([Butterworth coefficients and Sallen-Key topology](http://www.ti.com/lit/an/sloa049b/sloa049b.pdf)) 
-with a corner frequency of around 30 kHz to 40 kHz shall filter input device noise
+![Input Stage Circuit](https://rawgit.com/thomastaudt/classd-project/master/circuits/input_stage.svg)
+
+An active low-pass filter of 2nd 
+([Butterworth coefficients and Sallen-Key topology](http://www.ti.com/lit/an/sloa049b/sloa049b.pdf), this [page](http://sim.okawa-denshi.jp/en/OPseikiLowkeisan.htm) is helpful) 
+with a corner frequency of around 30 kHz shall filter input device noise
 while not compromising the input signal in the audible 20 Hz to 20 kHz range.
 This removes unwanted high frequency components that may deteriorate the
 modulation (if the noise is close to or higher than the modulation
 frequency) and produce electromagnetic inference throughout the circuit.
+The supply voltage for the NE5532 is +6V and -6V (as for the rest of the
+circuit).
 
-After low-pass filtering, the signal is ac-coupled to the
-modulator/comparator using a simple capacity of around 5 μF. This assures
+After low-pass filtering (and amplifying with a gain of 2), the signal is
+ac-coupled to the
+modulator/comparator using a simple capacity of 5 μF. This assures
 that the input to the comparator is centered around 0 V as will be the
 input from the triangle generator. Frequencies of 20 Hz and above are
-barely affected by this (Question: How can we use ac coupling when the
-input of the comparator has low currents?).
+barely affected by this.
 
 ### Triangle/Sawtooth Generator
-For the pulse width modulation a triangle or sawtooth signal of a few
-hundred kHz is needed. The shape of the triangle/sawtooth is of high
+For the pulse width modulation a triangle or sawtooth signal of usually 100kHz
+to 500 kHz is used. The shape of the triangle/sawtooth is of high
 importance, as non-linearities will lead to systematic distortions of the
-signal, independent of the modulation frequency. (Put precisely though, the
-flanks don't have to be linear if the frequency is high enough; rather the
+audio signal, independent of the modulation frequency. (Put precisely though,
+the flanks don't have to be linear if the frequency is high enough, but the
 duty must be proportional to the height.)
 
-...
+For this project, a simple opamp-driven multivibrator circuit was used:
 
-Since the audio input and the triangle/sawtooth voltage should be centered
-around the same potential, the generator is expected to output a signal
-without dc component.
+** COMING SOON **
+
+This way, formidable triangle waves of frequencies up to 400k could be
+produced. Note that the usage of the high performance opamp CA3130 was
+necessary in order to archieve this frequencies (an LM358 failed for much lower frequencies while an NE5532 did better but failed at producing sharp peaks).
+
+The resistors and the capacity were chosen such that a 125kHz triangle with
+an amplitude of about 1V resulted. The frequency was relatively small, as a
+faster modulation would have led to problems in the remaining circuit, which
+is not well adepted for too high frequencies.
+
+Since the amplitude of the modulation signal in relation to the audio input
+determines, how strong the actual amplification of the class D amplifier will
+be, a non-inverting opamp-amplifier (NE5532) is used on the original triangle.
+The amplitude of the triangle may then be adjusted with an potentiometer
+governing R1.
+
+Remark: The triangle generated here is actually part of the charging curve
+of the 5μF film capacitor, but an early cutoff makes it very triangluar-ish.
+
 
 ### Modulator
 The filtered audio input V1 and the generated triangle V2 are compared to
-yield the pulse width modulated signal Q (high if V1 > V2, low otherwise)
-and its inverse Qi. For this task the comparator lm360 is used.
+yield the pulse width modulated (PWM) signal Q (high if V1 > V2, low otherwise)
+and its inverse Qi. For this task the comparator lm311 is used.
 
 ### Output Stage
+The most interesting part of the class D amplifier is the output stage, where
+(1) the actual amplification happens and (2) the signal is low-pass-filtered to (at least partially) remove the high-frequency components of the modulated
+signal. Two designs are common: Half-bridge or full-bridge (see e.g.
+[here](http://www.eetimes.com/document.asp?doc_id=1274877&page_number=2)).
+
+
+
 Design questions:
   * [BTL output (full-bridge) or single-ended (half-bridge)](http://www.eetimes.com/document.asp?doc_id=1274877&page_number=2).
   * MOSFET gate drivers / dead-time generation
@@ -81,3 +109,4 @@ Points regarding the [Material Selection](http://www.eetimes.com/document.asp?do
   * [Design and analysis of a basic class D amplifier](http://www.eetimes.com/document.asp?doc_id=1274753)
   * [The Class-D Amplifier](http://users.ece.gatech.edu/~mleach/ece4435/f01/ClassD2.pdf)
   * [Design Considerations for Class-D Audio Power Amplifiers](http://www.ti.com/lit/an/sloa031/sloa031.pdf)
+  * [Sallen-Key Low-pass Filter Design Tool](http://sim.okawa-denshi.jp/en/OPseikiLowkeisan.htm)
