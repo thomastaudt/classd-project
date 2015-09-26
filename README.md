@@ -107,4 +107,6 @@ Points regarding the [Material Selection](http://www.eetimes.com/document.asp?do
   * [Class D Audio Amplifier Basics](http://www.irf.com/technical-info/appnotes/an-1071.pdf)
   * [Class D Audio Amplifiers: What, Why, and How](http://www.analog.com/library/analogDialogue/archives/40-06/class_d.pdf)
   * [Design and analysis of a basic class D amplifier](http://www.eetimes.com/document.asp?doc_id=1274753)
+  * [The Class-D Amplifier](http://users.ece.gatech.edu/~mleach/ece4435/f01/ClassD2.pdf)
+  * [Design Considerations for Class-D Audio Power Amplifiers](http://www.ti.com/lit/an/sloa031/sloa031.pdf)
   * [Sallen-Key Low-pass Filter Design Tool](http://sim.okawa-denshi.jp/en/OPseikiLowkeisan.htm)
